@@ -77,19 +77,44 @@
 
     <!-- Sabit ve Beyaz Navbar (Çizgi ile ayrılmış) -->
     <nav class="fixed left-1/2 -translate-x-1/2 top-0 w-full z-50 px-6 py-5 flex justify-between items-center bg-white border-b border-stone-200 transition-all duration-500 ease-out" id="navbar">
-        <a href="index.html" class="text-4xl font-serif tracking-tight font-semibold">vôla.</a>
         
-        <div class="hidden md:flex items-center gap-10 text-sm font-medium text-stone-600">
-            <a href="katalog.html" class="text-black transition-opacity">Katalog</a>
-            <a href="index.html" class="hover:text-black transition-opacity">Hakkımızda</a>
-            <a href="index.html" class="hover:text-black transition-opacity">Yorumlar</a>
+        <!-- Sol: Mobil Hamburger & Masaüstü Menü -->
+        <div class="flex items-center">
+            <!-- Mobil Hamburger Butonu -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-stone-900 hover:opacity-60 transition-opacity">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            
+            <!-- Masaüstü Menü -->
+            <div class="hidden md:flex items-center gap-10 text-sm font-medium text-stone-600">
+                <a href="katalog.html" class="text-black transition-opacity">Katalog</a>
+                <a href="index.html" class="hover:text-black transition-opacity">Hakkımızda</a>
+                <a href="index.html" class="hover:text-black transition-opacity">Yorumlar</a>
+            </div>
         </div>
 
-        <div class="flex items-center gap-4 text-sm font-medium text-stone-600">
+        <!-- Orta: Ortalanmış Logo -->
+        <a href="index.html" class="absolute left-1/2 -translate-x-1/2 text-4xl font-serif tracking-tight font-semibold z-50">vôla.</a>
+
+        <!-- Sağ: Aksiyonlar -->
+        <div class="flex items-center gap-4 text-sm font-medium text-stone-600 relative z-50">
             <button onclick="openLoginModal()" class="hover:text-black transition-opacity hidden sm:block">Giriş Yap</button>
-            <button class="hover:text-black transition-opacity">Sepet (0)</button>
+            <button onclick="openCartModal()" class="hover:text-black transition-opacity">Sepet (3)</button>
         </div>
     </nav>
+
+    <!-- Mobil Menü Ekranı -->
+    <div id="mobile-menu" class="fixed inset-0 z-[100] bg-white/95 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 flex flex-col items-center justify-center">
+        <button onclick="toggleMobileMenu()" class="absolute top-6 left-6 text-3xl text-stone-900 hover:opacity-60">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="flex flex-col items-center gap-8 text-3xl font-serif text-stone-900">
+            <a href="katalog.html" class="hover:opacity-60 transition-opacity">Katalog</a>
+            <a href="index.html" class="hover:opacity-60 transition-opacity">Hakkımızda</a>
+            <a href="index.html" class="hover:opacity-60 transition-opacity">Yorumlar</a>
+            <button onclick="openLoginModal(); toggleMobileMenu();" class="hover:opacity-60 transition-opacity text-xl font-sans mt-4">Giriş Yap</button>
+        </div>
+    </div>
 
     <!-- Login Modal Overlay -->
     <div id="login-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
@@ -164,6 +189,68 @@
         </div>
     </div>
 
+    <!-- Mini Cart Drawer -->
+    <div id="cart-drawer" class="fixed inset-0 z-[110] flex justify-end opacity-0 pointer-events-none transition-opacity duration-500">
+        <div class="absolute inset-0 bg-stone-900/30 backdrop-blur-sm" onclick="closeCartModal()"></div>
+        <div id="cart-drawer-content" class="relative w-full max-w-[420px] h-full bg-white/70 backdrop-blur-2xl border-l border-white/60 shadow-[-8px_0_40px_rgba(0,0,0,0.1)] rounded-l-[2.5rem] p-8 flex flex-col transform translate-x-full transition-transform duration-500">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-serif text-stone-900">Sepetim <span class="text-lg text-stone-400 font-light italic">(3)</span></h2>
+                <button onclick="closeCartModal()" class="text-stone-500 hover:text-stone-800 transition-colors"><i class="fa-solid fa-xmark text-2xl"></i></button>
+            </div>
+
+            <!-- Cart Items -->
+            <div class="flex-1 overflow-y-auto pr-2 space-y-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                <div class="flex gap-4 group cursor-pointer" onclick="window.location.href='urun.html'">
+                    <img src="derinlemesine-bakim-kremi-urun.png" alt="Krem" class="w-20 h-24 object-cover bg-white rounded-xl border border-stone-100 mix-blend-multiply p-1.5 shrink-0 transition-transform group-hover:scale-105">
+                    <div class="flex-1 flex flex-col justify-between py-1">
+                        <div>
+                            <h3 class="text-sm font-semibold text-stone-900 leading-tight group-hover:text-stone-600 transition-colors">Derinlemesine Bakım Kremi</h3>
+                            <p class="text-[11px] text-stone-500 font-serif italic mt-1">50 ml</p>
+                        </div>
+                        <span class="text-sm font-medium text-stone-900">1 x 850.00 ₺</span>
+                    </div>
+                </div>
+                <div class="flex gap-4 group cursor-pointer" onclick="window.location.href='urun.html'">
+                    <img src="yatistirici-temizleyici-urun.png" alt="Temizleyici" class="w-20 h-24 object-cover bg-white rounded-xl border border-stone-100 mix-blend-multiply p-1.5 shrink-0 transition-transform group-hover:scale-105">
+                    <div class="flex-1 flex flex-col justify-between py-1">
+                        <div>
+                            <h3 class="text-sm font-semibold text-stone-900 leading-tight group-hover:text-stone-600 transition-colors">Yatıştırıcı Temizleyici</h3>
+                            <p class="text-[11px] text-stone-500 font-serif italic mt-1">150 ml</p>
+                        </div>
+                        <span class="text-sm font-medium text-stone-900">1 x 650.00 ₺</span>
+                    </div>
+                </div>
+                <div class="flex gap-4 group cursor-pointer" onclick="window.location.href='urun.html'">
+                    <img src="canlandirici-iksir-serum-urun.png" alt="Serum" class="w-20 h-24 object-cover bg-white rounded-xl border border-stone-100 mix-blend-multiply p-1.5 shrink-0 transition-transform group-hover:scale-105">
+                    <div class="flex-1 flex flex-col justify-between py-1">
+                        <div>
+                            <h3 class="text-sm font-semibold text-stone-900 leading-tight group-hover:text-stone-600 transition-colors">Canlandırıcı İksir Serum</h3>
+                            <p class="text-[11px] text-stone-500 font-serif italic mt-1">Standart Boy</p>
+                        </div>
+                        <span class="text-sm font-medium text-stone-900">1 x 1150.00 ₺</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-6 pt-6 border-t border-stone-200/60">
+                <div class="flex justify-between items-end mb-6">
+                    <span class="text-sm font-medium text-stone-600">Ara Toplam</span>
+                    <span class="text-2xl font-semibold text-stone-900 tracking-tight">2650.00 ₺</span>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <button onclick="window.location.href='sepet.html'" class="w-full bg-white border border-stone-300 text-stone-800 py-3.5 rounded-full text-sm font-medium hover:bg-stone-50 transition-colors">
+                        Sepete Git
+                    </button>
+                    <button class="w-full bg-[#1a1a1a] text-white py-3.5 rounded-full text-sm font-medium hover:bg-black transition-colors shadow-md">
+                        Ödeme Yap
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Ana Grid Konteyneri (Sayfa düzeni) -->
     <main class="mt-[80px] max-w-[1600px] mx-auto border-x border-stone-200">
         
@@ -205,7 +292,7 @@
                         <p class="text-[11px] text-stone-500 mb-2">Hyalüronik Asit Özlü</p>
                         <p class="text-sm font-medium mb-4">1150₺</p>
                     </div>
-                    <button onclick="window.location.href='urun.html'; event.stopPropagation();" class="w-full border border-stone-300 text-stone-800 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors">Sepete Ekle</button>
+                    <button onclick="addToCart(event, this)" class="w-full border border-stone-300 text-stone-800 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors">Sepete Ekle</button>
                 </div>
             </div>
             <!-- Ürün 2 -->
@@ -217,7 +304,7 @@
                         <p class="text-[11px] text-stone-500 mb-2">Yulaf ve Agave</p>
                         <p class="text-sm font-medium mb-4">650₺</p>
                     </div>
-                    <button onclick="window.location.href='urun.html'; event.stopPropagation();" class="w-full border border-stone-300 text-stone-800 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors">Sepete Ekle</button>
+                    <button onclick="addToCart(event, this)" class="w-full border border-stone-300 text-stone-800 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors">Sepete Ekle</button>
                 </div>
             </div>
             <!-- Ürün 3 -->
@@ -229,7 +316,7 @@
                         <p class="text-[11px] text-stone-500 mb-2">Biberiye Konsantresi</p>
                         <p class="text-sm font-medium mb-4">1350₺</p>
                     </div>
-                    <button onclick="window.location.href='urun.html'; event.stopPropagation();" class="w-full border border-stone-300 text-stone-800 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors">Sepete Ekle</button>
+                    <button onclick="addToCart(event, this)" class="w-full border border-stone-300 text-stone-800 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors">Sepete Ekle</button>
                 </div>
             </div>
         </section>
@@ -273,7 +360,7 @@
                         <p class="text-[11px] text-stone-500 mb-2">Shea ve E Vitamini</p>
                         <p class="text-sm font-medium mb-4">850₺</p>
                     </div>
-                    <button onclick="window.location.href='urun.html'; event.stopPropagation();" class="w-full border border-stone-300 text-stone-800 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors">Sepete Ekle</button>
+                    <button onclick="addToCart(event, this)" class="w-full border border-stone-300 text-stone-800 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors">Sepete Ekle</button>
                 </div>
             </div>
             <!-- Ürün 2 -->
@@ -285,7 +372,7 @@
                         <p class="text-[11px] text-stone-500 mb-2">Tam Koruma Kiti</p>
                         <p class="text-sm font-medium mb-4">1700₺</p>
                     </div>
-                    <button onclick="window.location.href='urun.html'; event.stopPropagation();" class="w-full border border-stone-300 text-stone-800 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors">Sepete Ekle</button>
+                    <button onclick="addToCart(event, this)" class="w-full border border-stone-300 text-stone-800 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors">Sepete Ekle</button>
                 </div>
             </div>
             <!-- Ürün 3 -->
@@ -297,7 +384,7 @@
                         <p class="text-[11px] text-stone-500 mb-2">Matte Sage</p>
                         <p class="text-sm font-medium mb-4">350₺</p>
                     </div>
-                    <button onclick="window.location.href='urun.html'; event.stopPropagation();" class="w-full border border-stone-300 text-stone-800 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors">Sepete Ekle</button>
+                    <button onclick="addToCart(event, this)" class="w-full border border-stone-300 text-stone-800 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors">Sepete Ekle</button>
                 </div>
             </div>
         </section>
@@ -312,6 +399,16 @@
 
     <!-- JS ve Etkileşimler -->
     <script>
+        // --- Mobil Menü Logic ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('opacity-0')) {
+                menu.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                menu.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
         // --- Login Modal Logic ---
         function openLoginModal() {
             const modal = document.getElementById('login-modal');
@@ -375,6 +472,50 @@
         window.addEventListener('pageshow', (event) => {
             if (event.persisted) document.body.classList.add('page-loaded');
         });
+
+        // --- Mini Cart Logic ---
+        function openCartModal() {
+            const modal = document.getElementById('cart-drawer');
+            const content = document.getElementById('cart-drawer-content');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            content.classList.remove('translate-x-full');
+        }
+
+        function closeCartModal() {
+            const modal = document.getElementById('cart-drawer');
+            const content = document.getElementById('cart-drawer-content');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            content.classList.add('translate-x-full');
+        }
+
+        // --- Sepete Ekle Animasyonu ---
+        function addToCart(event, button) {
+            event.preventDefault();
+            event.stopPropagation(); // Ürün kartına tıklanma olayını engeller
+
+            const originalHTML = button.innerHTML;
+            
+            // Animasyon: Buton rengi ve yazısı değişir
+            button.innerHTML = "Eklendi ✓";
+            button.style.backgroundColor = "#c1cfb9"; // Temaya uygun yumuşak yeşil
+            button.style.color = "#111"; // Koyu metin
+            button.style.borderColor = "#c1cfb9";
+            button.style.transform = "scale(0.96)";
+            button.style.transition = "all 0.3s ease";
+            
+            setTimeout(() => {
+                button.style.transform = "scale(1)";
+            }, 150);
+
+            // Kısa bir beklemenin ardından sepeti aç
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.style.backgroundColor = "";
+                button.style.color = "";
+                button.style.borderColor = "";
+                openCartModal();
+            }, 800);
+        }
     </script>
 </body>
 </html>
