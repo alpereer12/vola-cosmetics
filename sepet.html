@@ -39,8 +39,8 @@
         body.page-loaded {
             opacity: 1;
         }
-
-        /* Blob Animasyonu (Login Modal için) */
+        
+        /* Blob Animasyonları */
         @keyframes blob {
             0% { transform: translate(0px, 0px) scale(1); }
             33% { transform: translate(30px, -50px) scale(1.1); }
@@ -53,7 +53,7 @@
 </head>
 <body class="antialiased">
 
-    <!-- Sabit Navbar -->
+    <!-- Navbar -->
     <nav class="fixed left-1/2 -translate-x-1/2 top-0 w-full z-50 px-6 py-5 flex justify-between items-center bg-[#f7f8f6] border-b border-stone-200 transition-all duration-500 ease-out" id="navbar">
         <div class="flex items-center">
             <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-stone-900 hover:opacity-60 transition-opacity">
@@ -65,17 +65,15 @@
                 <a href="index.html" class="hover:text-black transition-opacity">Yorumlar</a>
             </div>
         </div>
-        <a href="index.html" class="absolute left-1/2 -translate-x-1/2 text-4xl font-serif tracking-tight font-semibold text-stone-900 z-50">vôla.</a>
+        <a href="index.html" class="absolute left-1/2 -translate-x-1/2 text-4xl font-serif tracking-tight font-semibold z-50">vôla.</a>
         <div class="flex items-center gap-4 text-sm font-medium text-stone-600 relative z-50">
             <button onclick="openLoginModal()" class="hover:text-black transition-opacity hidden sm:block">Giriş Yap</button>
-            <a href="sepet.html" class="text-black transition-opacity hidden sm:block">Sepet (3)</a>
-            <button onclick="openLoginModal()" class="sm:hidden text-lg hover:text-black transition-opacity"><i class="fa-regular fa-user"></i></button>
-            <a href="sepet.html" class="sm:hidden text-lg text-black transition-opacity"><i class="fa-solid fa-bag-shopping"></i></a>
+            <button onclick="openCartModal()" class="text-black transition-opacity font-semibold">Sepet (3)</button>
         </div>
     </nav>
 
     <!-- Mobil Menü Ekranı -->
-    <div id="mobile-menu" class="fixed inset-0 z-[100] bg-white/95 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 flex flex-col items-center justify-center">
+    <div id="mobile-menu" class="fixed inset-0 z-[100] bg-[#f7f8f6]/95 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 flex flex-col items-center justify-center">
         <button onclick="toggleMobileMenu()" class="absolute top-6 left-6 text-3xl text-stone-900 hover:opacity-60">
             <i class="fa-solid fa-xmark"></i>
         </button>
@@ -87,7 +85,7 @@
         </div>
     </div>
 
-    <!-- Login Modal Overlay -->
+    <!-- Login Modal -->
     <div id="login-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
         <div class="absolute inset-0 bg-stone-900/30 backdrop-blur-sm" onclick="closeLoginModal()"></div>
         <div class="relative w-full max-w-[380px] mx-4 transform scale-95 transition-transform duration-500" id="login-modal-content">
@@ -101,32 +99,122 @@
                     </div>
                     <div class="flex justify-between items-center mb-8">
                         <h2 class="text-3xl font-medium tracking-tight text-stone-900">Giriş Yap</h2>
-                        <button class="bg-white/60 hover:bg-white border border-stone-200 rounded-full px-4 py-2 text-xs font-medium flex items-center gap-2 transition-colors shadow-sm">
+                        <button class="bg-white/60 hover:bg-white border border-stone-200 rounded-full px-4 py-2 text-xs font-medium flex items-center gap-2 shadow-sm">
                             <i class="fa-brands fa-google text-stone-700"></i> Google
                         </button>
                     </div>
                     <form onsubmit="event.preventDefault();" class="space-y-4">
-                        <div class="relative flex items-center bg-white/80 border border-white/50 rounded-full p-1.5 backdrop-blur-md shadow-sm focus-within:ring-2 focus-within:ring-white/80 transition-all">
+                        <div class="relative flex items-center bg-white/80 border border-white/50 rounded-full p-1.5 backdrop-blur-md shadow-sm focus-within:ring-2 focus-within:ring-white/80">
                             <div class="w-10 h-10 flex items-center justify-center text-stone-500"><i class="fa-solid fa-at text-sm"></i></div>
-                            <input type="email" placeholder="e-posta adresi" class="flex-1 bg-transparent border-none outline-none text-sm px-2 text-stone-800 placeholder-stone-400" required>
+                            <input type="email" placeholder="e-posta adresi" class="flex-1 bg-transparent border-none outline-none text-sm px-2 text-stone-800" required>
                         </div>
-                        <div class="relative flex items-center bg-white/80 border border-white/50 rounded-full p-1.5 backdrop-blur-md shadow-sm focus-within:ring-2 focus-within:ring-white/80 transition-all">
+                        <div class="relative flex items-center bg-white/80 border border-white/50 rounded-full p-1.5 backdrop-blur-md shadow-sm focus-within:ring-2 focus-within:ring-white/80">
                             <div class="w-10 h-10 flex items-center justify-center text-stone-500"><i class="fa-solid fa-key text-sm"></i></div>
-                            <input type="password" placeholder="şifre" class="flex-1 bg-transparent border-none outline-none text-sm px-2 text-stone-800 placeholder-stone-400" required>
-                            <button type="button" class="bg-white text-stone-600 text-[10px] font-semibold uppercase px-3 py-1.5 rounded-full mr-1 hover:bg-stone-100 transition-colors shadow-sm">Unuttum</button>
+                            <input type="password" placeholder="şifre" class="flex-1 bg-transparent border-none outline-none text-sm px-2 text-stone-800" required>
+                            <button type="button" class="bg-white text-stone-600 text-[10px] font-semibold uppercase px-3 py-1.5 rounded-full mr-1 hover:bg-stone-100">Unuttum</button>
                         </div>
                         <div class="flex items-center justify-between mt-8 pt-4">
                             <p class="text-[9px] text-stone-500 leading-relaxed max-w-[180px]">Yalnızca sizinle ilgilenen, size özel bir deneyim için giriş yapın.</p>
-                            <button type="submit" class="bg-[#1a1a1a] hover:bg-black text-white rounded-full p-1 w-[70px] h-10 flex items-center justify-end transition-all shadow-lg group shrink-0">
-                                <div class="w-8 h-8 rounded-full bg-[#333] group-hover:bg-[#444] flex items-center justify-center transition-colors">
-                                    <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                                </div>
+                            <button type="submit" class="bg-[#1a1a1a] hover:bg-black text-white rounded-full p-1 w-[70px] h-10 flex items-center justify-end shadow-lg group">
+                                <div class="w-8 h-8 rounded-full bg-[#333] group-hover:bg-[#444] flex items-center justify-center"><i class="fa-solid fa-chevron-right text-[10px]"></i></div>
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
-            <button onclick="closeLoginModal()" class="absolute -top-12 right-0 text-white/80 hover:text-stone-800 transition-colors"><i class="fa-solid fa-xmark text-2xl"></i></button>
+            <button onclick="closeLoginModal()" class="absolute -top-12 right-0 text-white/80 hover:text-stone-800"><i class="fa-solid fa-xmark text-2xl"></i></button>
+        </div>
+    </div>
+
+    <!-- Mini Cart Drawer -->
+    <div id="cart-drawer" class="fixed inset-0 z-[110] flex justify-end opacity-0 pointer-events-none transition-opacity duration-500">
+        <div class="absolute inset-0 bg-stone-900/30 backdrop-blur-sm" onclick="closeCartModal()"></div>
+        <div id="cart-drawer-content" class="relative w-full max-w-[420px] h-full bg-white/70 backdrop-blur-2xl border-l border-white/60 shadow-[-8px_0_40px_rgba(0,0,0,0.1)] rounded-l-[2.5rem] p-8 flex flex-col transform translate-x-full transition-transform duration-500">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-serif text-stone-900">Sepetim <span id="mini-cart-count" class="text-lg text-stone-400 font-light italic">(3)</span></h2>
+                <button onclick="closeCartModal()" class="text-stone-500 hover:text-stone-800 transition-colors"><i class="fa-solid fa-xmark text-2xl"></i></button>
+            </div>
+
+            <!-- Cart Items -->
+            <div id="mini-cart-items" class="flex-1 overflow-y-auto pr-2 space-y-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                <div class="flex gap-4 group mini-cart-item relative">
+                    <img src="derinlemesine-bakim-kremi-urun.png" alt="Krem" class="w-20 h-24 object-cover bg-white rounded-xl border border-stone-100 mix-blend-multiply p-1.5 shrink-0 cursor-pointer transition-transform group-hover:scale-105" onclick="window.location.href='urun.html'">
+                    <div class="flex-1 flex flex-col justify-between py-1">
+                        <div class="flex justify-between items-start">
+                            <div class="cursor-pointer" onclick="window.location.href='urun.html'">
+                                <h3 class="text-sm font-semibold text-stone-900 leading-tight group-hover:text-stone-600 transition-colors">Derinlemesine Bakım Kremi</h3>
+                                <p class="text-[11px] text-stone-500 font-serif italic mt-1">50 ml</p>
+                            </div>
+                            <button onclick="removeMiniCartItem(this)" class="text-stone-400 hover:text-stone-900 transition-colors pl-2"><i class="fa-solid fa-xmark text-sm"></i></button>
+                        </div>
+                        <div class="flex justify-between items-end mt-2">
+                            <div class="border border-stone-300 rounded-full flex items-center justify-between px-2 py-0.5 w-16 text-xs">
+                                <button onclick="updateMiniCartQty(this, -1)" class="text-stone-400 hover:text-stone-900 transition-colors">-</button>
+                                <span class="font-medium text-stone-800 mini-qty-val">1</span>
+                                <button onclick="updateMiniCartQty(this, 1)" class="text-stone-400 hover:text-stone-900 transition-colors">+</button>
+                            </div>
+                            <span class="text-sm font-medium text-stone-900"><span class="mini-item-price" data-price="850">850.00</span> ₺</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-4 group mini-cart-item relative">
+                    <img src="yatistirici-temizleyici-urun.png" alt="Temizleyici" class="w-20 h-24 object-cover bg-white rounded-xl border border-stone-100 mix-blend-multiply p-1.5 shrink-0 cursor-pointer transition-transform group-hover:scale-105" onclick="window.location.href='urun.html'">
+                    <div class="flex-1 flex flex-col justify-between py-1">
+                        <div class="flex justify-between items-start">
+                            <div class="cursor-pointer" onclick="window.location.href='urun.html'">
+                                <h3 class="text-sm font-semibold text-stone-900 leading-tight group-hover:text-stone-600 transition-colors">Yatıştırıcı Temizleyici</h3>
+                                <p class="text-[11px] text-stone-500 font-serif italic mt-1">150 ml</p>
+                            </div>
+                            <button onclick="removeMiniCartItem(this)" class="text-stone-400 hover:text-stone-900 transition-colors pl-2"><i class="fa-solid fa-xmark text-sm"></i></button>
+                        </div>
+                        <div class="flex justify-between items-end mt-2">
+                            <div class="border border-stone-300 rounded-full flex items-center justify-between px-2 py-0.5 w-16 text-xs">
+                                <button onclick="updateMiniCartQty(this, -1)" class="text-stone-400 hover:text-stone-900 transition-colors">-</button>
+                                <span class="font-medium text-stone-800 mini-qty-val">1</span>
+                                <button onclick="updateMiniCartQty(this, 1)" class="text-stone-400 hover:text-stone-900 transition-colors">+</button>
+                            </div>
+                            <span class="text-sm font-medium text-stone-900"><span class="mini-item-price" data-price="650">650.00</span> ₺</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-4 group mini-cart-item relative">
+                    <img src="canlandirici-iksir-serum-urun.png" alt="Serum" class="w-20 h-24 object-cover bg-white rounded-xl border border-stone-100 mix-blend-multiply p-1.5 shrink-0 cursor-pointer transition-transform group-hover:scale-105" onclick="window.location.href='urun.html'">
+                    <div class="flex-1 flex flex-col justify-between py-1">
+                        <div class="flex justify-between items-start">
+                            <div class="cursor-pointer" onclick="window.location.href='urun.html'">
+                                <h3 class="text-sm font-semibold text-stone-900 leading-tight group-hover:text-stone-600 transition-colors">Canlandırıcı İksir Serum</h3>
+                                <p class="text-[11px] text-stone-500 font-serif italic mt-1">Standart Boy</p>
+                            </div>
+                            <button onclick="removeMiniCartItem(this)" class="text-stone-400 hover:text-stone-900 transition-colors pl-2"><i class="fa-solid fa-xmark text-sm"></i></button>
+                        </div>
+                        <div class="flex justify-between items-end mt-2">
+                            <div class="border border-stone-300 rounded-full flex items-center justify-between px-2 py-0.5 w-16 text-xs">
+                                <button onclick="updateMiniCartQty(this, -1)" class="text-stone-400 hover:text-stone-900 transition-colors">-</button>
+                                <span class="font-medium text-stone-800 mini-qty-val">1</span>
+                                <button onclick="updateMiniCartQty(this, 1)" class="text-stone-400 hover:text-stone-900 transition-colors">+</button>
+                            </div>
+                            <span class="text-sm font-medium text-stone-900"><span class="mini-item-price" data-price="1150">1150.00</span> ₺</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-6 pt-6 border-t border-stone-200/60">
+                <div class="flex justify-between items-end mb-6">
+                    <span class="text-sm font-medium text-stone-600">Ara Toplam</span>
+                    <span id="mini-cart-total" class="text-2xl font-semibold text-stone-900 tracking-tight">2650.00 ₺</span>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <button onclick="window.location.href='sepet.html'" class="w-full bg-white border border-stone-300 text-stone-800 py-3.5 rounded-full text-sm font-medium hover:bg-stone-50 transition-colors">
+                        Sepete Git
+                    </button>
+                    <button class="w-full bg-[#1a1a1a] text-white py-3.5 rounded-full text-sm font-medium hover:bg-black transition-colors shadow-md">
+                        Ödeme Yap
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -402,9 +490,68 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 border-t border-stone-200 text-center bg-white">
-        <a href="index.html" class="text-3xl font-serif tracking-tight font-semibold text-stone-900 mb-4 block">vôla.</a>
-        <p class="text-xs text-stone-500">&copy; 2026 vôla. Tüm hakları saklıdır.</p>
+    <footer class="w-full max-w-[1600px] mx-auto pt-20 pb-10 px-6 md:px-12 mt-10 border-t border-stone-200">
+        
+        <!-- Top: Centered Logo -->
+        <div class="flex justify-center items-center mb-16">
+            <a href="index.html" class="text-4xl md:text-5xl font-serif tracking-tight font-semibold text-[#8b9484] hover:opacity-80 transition-opacity">
+                vôla.
+            </a>
+        </div>
+
+        <!-- Main Links Section -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-16 text-[#9db093]">
+            
+            <div>
+                <h4 class="font-bold text-[#8b9484] mb-6 uppercase tracking-widest text-[11px]">Hızlı Linkler</h4>
+                <ul class="space-y-4 text-sm">
+                    <li><a href="index.html" class="hover:text-[#6a7364] transition-colors">Ana Sayfa</a></li>
+                    <li><a href="katalog.html" class="hover:text-[#6a7364] transition-colors">Katalog</a></li>
+                    <li><a href="index.html" class="hover:text-[#6a7364] transition-colors">Blog</a></li>
+                    <li><a href="index.html" class="hover:text-[#6a7364] transition-colors">S.S.S</a></li>
+                    <li><a href="index.html" class="hover:text-[#6a7364] transition-colors">Hakkımızda</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-bold text-[#8b9484] mb-6 uppercase tracking-widest text-[11px]">Müşteri Hizmetleri</h4>
+                <ul class="space-y-4 text-sm">
+                    <li><a href="#" class="hover:text-[#6a7364] transition-colors">İade ve Değişim</a></li>
+                    <li><a href="#" class="hover:text-[#6a7364] transition-colors">Sipariş Takibi</a></li>
+                    <li><a href="#" class="hover:text-[#6a7364] transition-colors">Beden Rehberi</a></li>
+                    <li><a href="#" class="hover:text-[#6a7364] transition-colors">Ürün Bakım Talimatları</a></li>
+                    <li><a href="#" class="hover:text-[#6a7364] transition-colors">Bize Ulaşın</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-[#8b9484] mb-6 uppercase tracking-widest text-[11px]">Yasal Bilgiler</h4>
+                <ul class="space-y-4 text-sm">
+                    <li><a href="#" class="hover:text-[#6a7364] transition-colors">Kullanım Koşulları</a></li>
+                    <li><a href="#" class="hover:text-[#6a7364] transition-colors">Gizlilik Politikası</a></li>
+                    <li><a href="#" class="hover:text-[#6a7364] transition-colors">Çerez Politikası</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-[#8b9484] mb-6 uppercase tracking-widest text-[11px]">İletişim Bilgileri</h4>
+                <ul class="space-y-4 text-sm">
+                    <li class="leading-relaxed">Nişantaşı, Teşvikiye Cd.<br>Şişli / İstanbul, Türkiye</li>
+                    <li><a href="tel:+902120000000" class="hover:text-[#6a7364] transition-colors">+90 (212) 000 00 00</a></li>
+                    <li><a href="mailto:info@volacosmetics.com" class="hover:text-[#6a7364] transition-colors">info@volacosmetics.com</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-stone-200 gap-6 text-[#9db093]">
+            <p class="text-xs">&copy; 2026 vôla. Tüm hakları saklıdır.</p>
+            <div class="flex gap-5">
+                <a href="#" class="hover:text-[#6a7364] transition-colors"><i class="fa-brands fa-facebook-f text-lg"></i></a>
+                <a href="#" class="hover:text-[#6a7364] transition-colors"><i class="fa-brands fa-youtube text-lg"></i></a>
+                <a href="#" class="hover:text-[#6a7364] transition-colors"><i class="fa-brands fa-instagram text-lg"></i></a>
+            </div>
+        </div>
     </footer>
 
     <!-- Scripts -->
@@ -598,6 +745,50 @@
                 button.style.backgroundColor = "";
                 button.style.color = "";
             }, 800);
+        }
+
+        // --- Mini Cart Dinamik Hesaplama Fonksiyonları ---
+        function updateMiniCartTotals() {
+            let total = 0;
+            let count = 0;
+            const items = document.querySelectorAll('.mini-cart-item');
+            
+            items.forEach(item => {
+                const price = parseFloat(item.querySelector('.mini-item-price').getAttribute('data-price'));
+                const qty = parseInt(item.querySelector('.mini-qty-val').innerText);
+                total += price * qty;
+                count += qty;
+            });
+
+            const totalDisplay = document.getElementById('mini-cart-total');
+            if (totalDisplay) totalDisplay.innerText = total.toFixed(2) + ' ₺';
+            
+            const countDisplay = document.getElementById('mini-cart-count');
+            if (countDisplay) countDisplay.innerText = '(' + count + ')';
+            
+            const container = document.getElementById('mini-cart-items');
+            if (count === 0 && !container.querySelector('.empty-mini-cart-msg')) {
+                container.innerHTML = '<p class="empty-mini-cart-msg text-stone-500 text-sm py-8 text-center italic">Sepetiniz boş.</p>';
+            }
+        }
+
+        function removeMiniCartItem(button) {
+            const item = button.closest('.mini-cart-item');
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(20px)';
+            item.style.transition = 'all 0.3s ease';
+            setTimeout(() => {
+                item.remove();
+                updateMiniCartTotals();
+            }, 300);
+        }
+
+        function updateMiniCartQty(button, change) {
+            const qtySpan = button.parentElement.querySelector('.mini-qty-val');
+            let newQty = parseInt(qtySpan.innerText) + change;
+            if (newQty < 1) newQty = 1;
+            qtySpan.innerText = newQty;
+            updateMiniCartTotals();
         }
     </script>
 </body>
